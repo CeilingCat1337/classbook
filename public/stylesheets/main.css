@@ -1,0 +1,53 @@
+body>div {
+	width:1000px;
+	margin:0px auto;
+}
+
+div {
+	border:1px solid black;
+}
+
+#header {
+	position:relative;
+	height:200px;
+}
+
+#logout {
+	position:absolute;
+	right:0px;
+}
+
+#menu {
+	position:absolute;
+	bottom:0px;
+	right:0px;
+	height:30px;
+	width:300px;
+}
+
+#wrapper {
+	overflow:hidden;
+}
+
+#wrapper>div {
+	min-height:600px;
+}
+
+#sidebarLeft {
+	float:left;
+	width:194px;
+}
+
+#nextOnSchedule {
+	height:400px;
+}
+
+#main {
+	float:left;
+	width:800px;	
+}
+
+
+#footer {
+	height:60px;
+}

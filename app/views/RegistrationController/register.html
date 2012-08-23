@@ -1,0 +1,21 @@
+#{extends 'main.html' /}
+
+<div id="register">
+	
+	#{form @RegistrationController.handleRegister()}
+		<input name="user.username" type="text" value="${flash['user.username']}" /><span class="error">#{error 'user.username' /}</span>
+		<input name="user.name" type="text" value="${flash['user.name']}" /><span class="error">#{error 'user.name' /}</span>
+		<input name="user.email" type="text" value="${flash['user.email']}" /><span class="error">#{error 'user.email' /}</span>
+		<input name="user.password" type="password" /><span class="error">#{error 'user.password' /}</span>
+		<input name="passwordCheck" type="password" /><span class="error">#{error 'passwordCheck' /}</span>
+		<input name="submit" type="submit" />
+	#{/form}
+	
+	#{ifErrors}
+		<p>You have made some mistakes</p>
+	#{/ifErrors}
+	
+	<a href="@{Secure.login()}">or login</a>
+	
+	
+</div>

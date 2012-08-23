@@ -1,0 +1,40 @@
+#{extends 'main.html' /}
+
+<div id="Location">
+	#{form @LocationController.handleSelectNewLocation()}
+		<div id="school">
+			<input id="inputSelectSchool" name="school.name" type="text" value="${flash['school.name']}" /><span class="error">#{error 'school.name' /}</span>
+			<a href="#" id="linkAddSchool">Add School</a>
+			<div id="divShowSchools">
+				<select name="schoolId" size="5">
+				#{if flash.schoolId}
+					#{list items:schools, as:'school'}
+						#{listSchool name:school.name, id:school.id, selected:flash.schoolId /}
+					#{/list}
+				#{/if}
+				#{else}
+					#{list items:schools, as:'school'}
+						#{listSchool name:school.name, id:school.id, selected:schoolId /}
+					#{/list}
+				#{/else}
+				</select><span class="error">#{error 'schoolId' /}</span>
+			</div>
+		</div>
+		<div id="squad">
+			<input id="inputSelectSquad" name="squad.name" type="text" value="${flash['squad.name']}" /><span class="error">#{error 'squad.name' /}</span>
+			<a href="#" id="linkAddSquad">Add Squad</a>
+			<div id="divShowSquads">
+				<select name="squadId" size="5">
+				#{list items:squads, as:'squad'}
+					#{listSquad name:squad.name, id:squad.id, selected:flash.squadId /}
+				#{/list}
+				</select><span class="error">#{error 'squadId' /}</span>
+			</div>
+		</div>
+		<input name="submit" type="submit" />
+	#{/form}
+	
+	#{ifErrors}
+		<p>You have made some errors</p>
+	#{/ifErrors}
+</div>

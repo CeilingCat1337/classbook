@@ -1,0 +1,9 @@
+#{extends 'main.html' /}
+
+#{if failed==false}
+	<p>Ihre Email Adresse wurde erfolgreich bestätigt</p>
+	<a href="@{Secure.login()}">weiter zum Login</a>
+#{/if}
+#{else}
+	<p>Error. Wenden Sie sich and den Admin oder <a href="@{RegistrationController.register()}">registrieren</a> Sie sich erneut</p>
+#{/else}
