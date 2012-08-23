@@ -38,14 +38,17 @@ public class LocationController extends LoginRequired {
     
     public static void handleSelectNewLocation(@Required Long schoolId, @Required Long squadId){
     	Squad squad = Squad.findById(squadId);
+    	System.out.println(squad.name);
+    	System.out.println(squad.reservedTill);
     	if(squad!=null){
+    		System.out.println("Time "+squad.reservedTill+" "+System.currentTimeMillis());
     		if(squad.reservedTill<System.currentTimeMillis()){
 				squad.reservedTill=null;
 				squad.reservedFor=null;
 			}
     		validation.isTrue("squadId", squad.reservedFor==null || squad.reservedFor==userLogged).message("This Squad is reserved");
     		validation.isTrue("squadId", squad.users.contains(userLogged)==false).message("You already are in this class");
-    		validation.isTrue("squadId", squad.usersApplying.contains(userLogged)==false).message("You have already sent a request");
+    		validation.isTrue("squadId", squad.appliers.contains(userLogged)==false).message("You have already sent a request");
     	}
     	if(validation.hasErrors()){
     		params.flash();

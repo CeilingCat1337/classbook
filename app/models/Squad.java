@@ -31,9 +31,6 @@ public class Squad extends Model {
 	@ManyToOne
 	public School school;
 	
-
-	public List<User> usersApplying = new ArrayList<User>(0);
-	
 	public Long reservedTill = (System.currentTimeMillis()+7200000);
 	public User reservedFor = NoLoginRequired.userLogged;
 	
@@ -70,8 +67,11 @@ public class Squad extends Model {
 	public List<User> users;
 	
 	@ManyToMany
-	@JoinTable(name="SQUAD_USERADMIN")
+	@JoinTable(name="SQUAD_ADMIN")
 	public List<User> admins;
 	
+	@ManyToMany
+    @JoinTable(name="SQUAD_APPLYER")
+	public List<User> appliers;
 
 }

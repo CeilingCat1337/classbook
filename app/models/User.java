@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
@@ -45,6 +46,15 @@ public class User extends Model{
 	@ManyToMany(mappedBy="admins", cascade=CascadeType.ALL)
 	public List<Squad> adminSquads;
 	
+	@ManyToMany(mappedBy="appliers", cascade=CascadeType.ALL)
+	public List<Squad> appliedSquads;
+	
+	@ManyToMany(mappedBy="to", cascade=CascadeType.ALL)
+	public List<Notification> NotificationsTo;
+	
+	@OneToMany(mappedBy="from", cascade=CascadeType.ALL)
+	public List<Notification> NotificationsFrom;
+	
 	public String emailConfirmationToken = Long.toString(new Random().nextLong(), 16);
 	
 	
@@ -60,16 +70,16 @@ public class User extends Model{
 	}
 
 	public void applyForSquad(Squad squad) {
-		squad.usersApplying.add(this);
+		squad.appliers.add(this);
 	}
 	
 	public void confirmRequest(Squad squad){
 		squad.users.add(this);
-		squad.usersApplying.remove(this);
+		squad.appliers.remove(this);
 	}
 	
 	public void denyRequest(Squad squad){
-		squad.usersApplying.remove(this);
+		squad.appliers.remove(this);
 	}
 	
 }
